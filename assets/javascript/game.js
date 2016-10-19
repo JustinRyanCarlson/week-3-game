@@ -5,12 +5,15 @@ window.onload = function() {
 	var halloweenWords = ["pumpkin", "ghost", "skeleton", "candy"];
 	var ranNum = Math.floor(Math.random() * (3 - 0) + 0);
 	var letterDiv = document.getElementById('hidden-letters');
+	var guessRemainDiv = document.getElementById('guesses-remaining');
 	var guessedLetterDiv = document.getElementById('guessed-letters');
 	var guessesRemaining = 7;
-	var wordToGuess = [];    //not sure if i need this
 	var guessedLetters = [];
+	var permGuessedLetters = [];
+	var correctGuess = false;
 	
 
+	guessRemainDiv.innerHTML = 'Number of guesses remaining: ' + guessesRemaining;
 
 	//creates then correct number of hidden letter spaces for the randomly 
 	//selected word in the array and writes it to the HTML
@@ -43,30 +46,48 @@ window.onload = function() {
 
 		
 		if (isLetterGuessed === false) {
+			permGuessedLetters.push(' ' + userGuess);
 			//displays guessed letters then a comma to seperate them if the 
 			//guesses remaining is greaterthan or equal to 0
 			if (guessesRemaining >= 0) {
-				var newGuessedLetterSpan = document.createElement('span');
-				var newGuessedLetterCommaSpan = document.createElement('span');
-				newGuessedLetterSpan.innerHTML = userGuess;
-				guessedLetterDiv.appendChild(newGuessedLetterSpan);
-				if (guessesRemaining > 0) {
-					newGuessedLetterCommaSpan.innerHTML = ', ';
-					guessedLetterDiv.appendChild(newGuessedLetterCommaSpan);
-				}
+				guessedLetterDiv.innerHTML = ('Guessed letters:' + permGuessedLetters);
 			}
 
 
 
-
-
-			checker:
+			correctGuess = false;
+			//this line looks at each letter in the word to guess and
+			//checks the users guess against it
 			for (var i=0; i < halloweenWords[ranNum].length; i++) {
 				if (userGuess === halloweenWords[ranNum][i]) {
-					console.log(userGuess);
-					break checker;
-				} 
+					console.log('letter is in this index');
+					//var newLetterSpan = document.createElement('span');
+					newLetterSpan.innerHTML = ' ' + halloweenWords[ranNum][i];
+					//letterDiv.appendChild(newLetterSpan);
+					correctGuess = true;
+				} else {
+					console.log('letter not in this index');
+					//var newLetterSpan = document.createElement('span');
+					newLetterSpan.innerHTML = ' _';
+					//letterDiv.appendChild(newLetterSpan);
+				}
 			}
+			//checks if the users guess is not in the word and
+			//if not decriments their remaining guesses by 1
+			if (correctGuess != true) {
+				guessesRemaining--;
+				guessRemainDiv.innerHTML = 'Number of guesses remaining: ' + guessesRemaining;
+			}
+
+
+			//alerts you lose if you have no remaining guess and choose
+			//another wrong letter
+			if (guessesRemaining === 0) {
+				alert('You lose!');
+			}
+
+
+
 
 		}
 

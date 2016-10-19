@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel='icon' href='assets/images/favicon.ico' type='image/x-icon'/ >
+	<script src="assets/javascript/game.js"></script>
+	<title>Hangman Game</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="jumbotron text-center">Halloween Hangman</h1>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-sm-5 col-xs-12">
+				<h4 class="font">Welcome!</h4>
+				<h5 class="font">The rules of this Halloween themed Hangman game are simple. Press any key on the keyboard to submit a guess. If your guess corresponds to a letter in the word it will be revealed. If you can figure out the word before the amount of guesses runs out you win, but watch out as each incorrect guess will count agaisnt you! If the number of remaining guesses reaches zero you lose.</h5>	
+			</div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-6 col-xs-12">
+				<h4>Press any key to play ...</h4>
+				<br>
+				<div class="letter-size" id="hidden-letters">
+					
+				</div>
+				<br>
+				<div>
+					<h5 id="guessed-letters">Letters previously guessed: </h5>
+				</div>
+				<div>
+					<h5 id="guesses-remaining">Number of remaining guesses: </h5>
+				</div>
+				<div>
+					<h5 id="wins">Wins: </h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

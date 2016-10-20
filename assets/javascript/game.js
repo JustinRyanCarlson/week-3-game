@@ -1,5 +1,7 @@
-var halloweenWords = ["pumpkin", "ghost", "skeleton", "candy"];
-var ranNum = Math.floor(Math.random() * (3 - 0) + 0);
+var halloweenWords = ["pumpkin", "ghost", "skeleton", "candy", "afraid", 
+					  "apparition", "cadaver", "bat", "bloody", "bones", 
+					  "casket", "cauldron" , "cemetery", "goblin"];
+var ranNum = Math.floor(Math.random() * (13 - 0) + 0);
 var letterDiv = document.getElementById('hidden-letters');
 var guessRemainDiv = document.getElementById('guesses-remaining');
 var guessedLetterDiv = document.getElementById('guessed-letters');
@@ -15,22 +17,20 @@ var isLetterGuessed = false;
 
 	
 
-
-
+initialize();
 
 //creates then correct number of hidden letter spaces for the randomly 
 //selected word in the array and writes it to the HTML
-guessRemainDiv.innerHTML = 'Number of guesses remaining: ' + guessesRemaining;
-winsDiv.innerHTML = 'Wins: ' + wins;
+function initialize(){
+	guessRemainDiv.innerHTML = 'Number of guesses remaining: ' + guessesRemaining;
+	winsDiv.innerHTML = 'Wins: ' + wins;
 
-for (var i=0; i < halloweenWords[ranNum].length; i++) {
-	letterBlank.push('_ ');
+	for (var i=0; i < halloweenWords[ranNum].length; i++) {
+		letterBlank.push('_ ');
+	}
+
+	letterDiv.innerHTML = letterBlank.join(' ');
 }
-
-letterDiv.innerHTML = letterBlank.join(' ');
-
-
-
 
 
 
@@ -41,11 +41,13 @@ document.onkeyup = function(event) {
 	
 	alreadyGuessCheck();
 	
+	//if the letter has previously been guessed, it will not run anymore code and
+	//instead wait for another user input
 	if (isLetterGuessed === false) {
 		showGuessedLetters();
 		guessChecker();
 		winChecker();
-		wrongGuessChecker();
+		wrongGuessCounter();
 		loseChecker();	
 	}
 
@@ -94,7 +96,7 @@ document.onkeyup = function(event) {
 		}
 			
 		if (winCheck === true) {
-			alert('You Win!');
+			alert('You Win! The word was ' + halloweenWords[ranNum] + '.');
 			wins++;
 			reset();
 		}
@@ -122,7 +124,7 @@ document.onkeyup = function(event) {
 
 	//checks if the users guess is not in the word and if not decriments 
 	//their remaining guesses by 1 and updates the HTML		
-	function wrongGuessChecker() {
+	function wrongGuessCounter() {
 		if (correctGuess != true) {
 			guessesRemaining--;
 			guessRemainDiv.innerHTML = 'Number of guesses remaining: ' + guessesRemaining;
@@ -141,7 +143,7 @@ document.onkeyup = function(event) {
 
 	//resets the game so you can play again
 	function reset() {
-		ranNum = Math.floor(Math.random() * (3 - 0) + 0);
+		ranNum = Math.floor(Math.random() * (13 - 0) + 0);
 		guessesRemaining = 7;
 		guessedLetters = [];
 		permGuessedLetters = [];
